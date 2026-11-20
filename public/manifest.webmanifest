@@ -1,0 +1,13 @@
+{
+  "name": "Dani’s Donut Island",
+  "short_name": "Donut Island",
+  "description": "A playable 3D island and love letter for Dani, made by Dani’s Donuts.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff7f1",
+  "theme_color": "#fff7f1",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
