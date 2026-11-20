@@ -252,6 +252,19 @@
 .hud.show-hint.can-act .hud-hint {
   opacity: 0;
 }
+/* on touch screens the action buttons own the bottom-right corner */
+.hud.touch .hud-hint {
+  left: max(14px, env(safe-area-inset-left));
+  right: auto;
+  max-width: calc(100% - 180px);
+  white-space: normal;
+  text-align: left;
+  border-radius: 16px;
+  transform: translateY(10px);
+}
+.hud.touch.show-hint .hud-hint {
+  transform: none;
+}
 .hud-prompt {
   position: absolute;
   left: 50%;
