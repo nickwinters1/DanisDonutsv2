@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Dani’s Donut Island • Life is sweeter with you</title>
+    <meta name="description" content="A playable 3D island and love letter for Dani, made by Dani’s Donuts. Explore the island, meet the Donuts, collect sprinkles, leave a note and unlock the grand finale." />
+    <meta name="theme-color" content="#fff7f1" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icon-512.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Dani’s Donut Island" />
+    <meta property="og:description" content="Life is sweeter with you, Dani. Explore the island, meet the Donuts and leave a little sweetness." />
+    <meta property="og:image" content="./og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+      /* first paint, before the CSS bundle arrives */
+      html { background: #fff7f1; }
+      body { margin: 0; }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#messages">Skip to the love notes</a>
+    <div class="page-glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <header class="top" id="top">
+        <a class="brand" href="#home" aria-label="Dani’s Donut Island, back to top">
+          <span class="logo" aria-hidden="true"><svg viewBox="-50 -50 100 100"><circle r="46" fill="#e2ad72"/><path d="M0-40a40 40 0 1 1 0 80a40 40 0 1 1 0-80Zm0 26a14 14 0 1 0 0 28a14 14 0 1 0 0-28Z" fill="#f39db9" fill-rule="evenodd"/><circle r="14" fill="#fff7f1"/><g stroke-width="5" stroke-linecap="round"><path d="M-22-24l6 3M18 14l6 4M-26 14l5-6M12-30l5 4M-6 26l-2 7M26-8l7-1" stroke="#fff4ce"/><path d="M-30-4l-6 2M4-34l6-1M24 24l3 6" stroke="#9fd9df"/></g></svg></span>
+          <span>Dani’s Donut Island<small>MADE WITH LOVE BY THE DONUTS</small></span>
+        </a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#adventure">Play</a>
+          <a href="#experiences">Explore</a>
+          <a href="#messages">Love notes</a>
+          <a href="#treasures">Treasures</a>
+          <button type="button" class="icon-btn" data-action="sound" aria-label="Sound on" title="Sound"></button>
+          <button type="button" class="btn small" data-contribute>✉ Leave a note</button>
+        </nav>
+      </header>
+
+      <main id="home">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <div class="eyebrow">A little island with a lot of heart</div>
+            <h1 id="hero-title">Life is sweeter<br /> <em>with you, Dani.</em></h1>
+            <p>A little corner of the internet where every donut, every memory and every friendship has a place in the sun.</p>
+            <div class="actions">
+              <button type="button" class="btn big" data-play>Play the island <span aria-hidden="true">→</span></button>
+              <button type="button" class="btn light" data-action="reveal">✦ Open the surprise</button>
+            </div>
+            <ul class="hero-facts" aria-label="What’s on the island">
+              <li><b>6</b> destinations</li>
+              <li><b>40</b> sprinkles</li>
+              <li><b>1</b> big surprise</li>
+            </ul>
+          </div>
+          <div class="hero-art" id="hero-art">
+            <div class="hero-fallback"><svg class="hero-svg" viewBox="0 0 640 530" role="img" aria-label="Illustrated pastel tropical island with a donut café, crystal cove, palm trees, ocean and collectible treasures"><defs><linearGradient id="h-ocean" x2="0.25" y2="1"><stop stop-color="#b2dfe4"/><stop offset="1" stop-color="#78c6d2"/></linearGradient><linearGradient id="h-sand" x2="0" y2="1"><stop stop-color="#fff4d4"/><stop offset="1" stop-color="#f7d9a5"/></linearGradient><linearGradient id="h-crystal" x2="1" y2="1"><stop stop-color="#e9dcff"/><stop offset="1" stop-color="#a991df"/></linearGradient><linearGradient id="h-pink" x2="0" y2="1"><stop stop-color="#ffcada"/><stop offset="1" stop-color="#e890af"/></linearGradient><filter id="h-sh"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#6b8298" flood-opacity=".19"/></filter><g id="h-palm"><path d="M0 80 Q-9 45 7 9" stroke="#b88d72" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M7 10 Q-27 -13 -51 17 Q-14 7 7 10 Q-7 -23 18 -34 Q8 -7 7 10 Q47 -18 59 12 Q33 4 7 10 Q39 12 37 42 Q24 23 7 10 Q-23 14 -24 41 Q-6 25 7 10" fill="#75b9a0"/><path d="M7 10 Q-26 -17 -39 0 Q-9 0 7 10 Q22 -17 40 -10 Q23 0 7 10" fill="#a8d9bd"/><circle cx="7" cy="12" r="5" fill="#c49b77"/></g><g id="h-gem"><path d="M0 -37 23 -15 17 25 0 39 -18 22 -23 -15Z" fill="url(#h-crystal)" stroke="#ae9bd7" stroke-width="1.5"/><path d="M0 -37 7 -10 0 39 -7 -10Z" fill="#f3e7ff"/><path d="M-23 -15 -7 -10 -18 22M23 -15 7 -10 17 25" fill="#bfabea"/></g><g id="h-donut"><circle r="28" fill="#d5a16e"/><circle cy="-3" r="26" fill="#f5a4bd"/><circle cy="-2" r="9" fill="#f8e8d7"/><g stroke-linecap="round" stroke-width="3"><path d="M-14 -17l5 2M14 8l5 3M-17 12l4 -5" stroke="#fff4ce"/><path d="M9 -19l4 4M-18 -6l-4 2M4 18l-4 2" stroke="#a9d9df"/></g></g><g id="h-star"><path d="M0 -12 3 -3 12 0 3 3 0 12 -3 3 -12 0 -3 -3Z" fill="#fff8dc"/></g></defs>
+<circle cx="440" cy="103" r="69" fill="#fff5d3" opacity=".75"/><g fill="#fff" opacity=".7"><ellipse cx="108" cy="91" rx="44" ry="13"/><ellipse cx="138" cy="89" rx="30" ry="15"/><ellipse cx="502" cy="65" rx="38" ry="11"/></g><ellipse cx="330" cy="410" rx="291" ry="91" fill="#aedbdc" opacity=".35"/><ellipse cx="330" cy="350" rx="282" ry="139" fill="url(#h-ocean)"/><path d="M74 312q-23 29 0 61m13 25q28 16 68 22m358 -109q46 23 35 52m-23 31q-28 18 -62 24" fill="none" stroke="#e7f7ef" stroke-width="3" stroke-linecap="round"/><path d="M96 328C77 265 157 218 244 204C338 185 453 223 520 289C580 349 522 401 425 419C327 440 154 421 110 372Q90 350 96 328Z" fill="#fff6d9" opacity=".85"/><path d="M110 322C86 266 164 225 247 210C341 193 447 229 504 286C563 343 514 389 420 406C327 429 173 409 122 366Q104 350 110 322Z" fill="url(#h-sand)" filter="url(#h-sh)"/><path d="M169 315Q229 277 291 313T406 330Q456 343 477 316" fill="none" stroke="#e9c999" stroke-width="23" stroke-linecap="round" opacity=".55"/><path d="M145 339Q193 362 240 340M379 389Q412 379 445 384" fill="none" stroke="#e3b887" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>
+<g transform="translate(150 219) scale(.83)"><use href="#h-palm"/></g><g transform="translate(481 219) scale(.85)"><use href="#h-palm"/></g><g transform="translate(509 278) scale(.53)"><use href="#h-palm"/></g><g transform="translate(118 290) scale(.52)"><use href="#h-palm"/></g>
+<g transform="translate(217 225)" filter="url(#h-sh)"><rect x="-54" y="-13" width="108" height="87" rx="7" fill="#fff0df" stroke="#ddad9b"/><path d="M-66 -13-50 -49H50L66 -13Z" fill="url(#h-pink)"/><path d="M-60 -12H60V5Q54 16 44 5Q32 17 20 5Q6 17 -6 5Q-18 17 -30 5Q-44 17 -60 5Z" fill="#fff4e9"/><path d="M-44 -49 -54 -13M-21 -49 -26 -13M2 -49V-13M25 -49 29 -13M47 -49 55 -13" stroke="#ffebed" stroke-width="8"/><rect x="-39" y="22" width="31" height="26" rx="4" fill="#bce2e1" stroke="#d9a7a1"/><path d="M-24 22V48M-39 35H-8" stroke="#fff" stroke-width="2"/><rect x="13" y="19" width="27" height="55" rx="5" fill="#dba8c4"/><circle cx="34" cy="47" r="2" fill="#fff"/><rect x="-32" y="-65" width="64" height="22" rx="10" fill="#fff8ef" stroke="#e0a9b9"/><text x="0" y="-50" text-anchor="middle" font-size="10" font-weight="700" fill="#985b75">DONUT BAR</text><g transform="translate(0 -90) scale(.85)"><g class="float"><use href="#h-donut"/></g></g></g>
+<g transform="translate(400 272)" filter="url(#h-sh)"><ellipse cy="30" rx="58" ry="17" fill="#ead5bd"/><g transform="translate(-31 8) scale(.62)"><use href="#h-gem"/></g><g transform="translate(4 -10) scale(1.04)"><use href="#h-gem"/></g><g transform="translate(36 13) scale(.55)"><use href="#h-gem"/></g><g transform="translate(35 -31) scale(.58)" class="spark"><use href="#h-star"/></g><g transform="translate(-40 -24) scale(.5)" class="spark"><use href="#h-star"/></g><rect x="-42" y="45" width="85" height="19" rx="9" fill="#fff5ec"/><text x="0" y="58" text-anchor="middle" font-size="9" font-weight="700" fill="#78648e">CRYSTAL COVE</text></g>
+<g transform="translate(287 353) rotate(-8)" filter="url(#h-sh)"><rect x="-32" y="-25" width="64" height="43" rx="6" fill="#fffbf3" stroke="#e3b6c4"/><path d="M-32 -20 0 1 32 -20M-32 15-8 -3M32 15 8 -3" stroke="#e3b6c4" fill="none" stroke-width="1.5"/><path d="M0 1C-17-8 -5-17 0-8C5-17 17-8 0 1" fill="#e58da8"/></g><g transform="translate(351 370) rotate(12)"><rect x="-17" y="-25" width="34" height="48" rx="5" fill="#fff8ec" stroke="#d5a9c3"/><rect x="-12" y="-20" width="24" height="27" rx="3" fill="#d4c9f0"/><path d="M0 -16 7 -7 0 3 -7 -7Z" fill="#fff1d6"/><path d="M-9 12H9M-9 16H4" stroke="#b7a0c7" stroke-width="2"/></g>
+<g transform="translate(162 370)"><path d="M-17 13Q0 -10 17 13Z" fill="#f0a8b8"/><path d="M0 12V-29" stroke="#b18a82" stroke-width="3"/><path d="M-38 -12Q0 -57 38 -12Z" fill="#f09eb9"/><path d="M-38 -12Q0 -57 0 -12M0 -12Q0 -57 38 -12" fill="#fff4e2" opacity=".8"/></g>
+<g transform="translate(534 165)"><g class="float two"><use href="#h-donut" transform="scale(.72)"/></g></g><g transform="translate(111 147)" class="spark"><use href="#h-star"/></g><g transform="translate(352 106) scale(.65)" class="spark"><use href="#h-star"/></g><g transform="translate(567 238) scale(.65)" class="spark"><use href="#h-star"/></g><g transform="translate(326 458)"><path d="M-24 0q12-7 24 0t24 0" fill="none" stroke="#e5faf5" stroke-width="3" stroke-linecap="round"/></g><g fill="#fff7eb" opacity=".85"><circle cx="101" cy="390" r="3"/><circle cx="548" cy="367" r="4"/><circle cx="466" cy="449" r="3"/></g></svg></div>
+            <span class="hero-stamp">✦ EST. BY DANI’S DONUTS</span>
+            <span class="hero-drag" aria-hidden="true">Drag to spin the island</span>
+          </div>
+        </section>
+
+        <div class="ribbon" role="status">
+          <div><span class="dot" id="event-dot"></span><strong id="event-title">A celebration for Dani</strong> <span id="event-state">· Preview edition</span></div>
+          <span id="mode-label" class="demo-label">Preview • saved on this device</span>
+        </div>
+
+        <section class="section" id="adventure" aria-labelledby="adventure-title">
+          <div class="section-head">
+            <div><div class="eyebrow">Chapter 01 · The Donutverse</div><h2 id="adventure-title">Your island adventure.</h2></div>
+            <p>Walk around, meet the Donuts, collect memories and unlock the final celebration. Keyboard, touch and controllers all work.</p>
+          </div>
+          <div class="savefile" id="savefile"></div>
+        </section>
+
+        <section class="section" id="experiences" aria-labelledby="exp-title">
+          <div class="section-head">
+            <div><div class="eyebrow">Special island attractions</div><h2 id="exp-title">A world made of memories.</h2></div>
+            <p>Make a donut, discover a crystal, rip a pack, watch a movie, play the arcade and see how far the community reaches.</p>
+          </div>
+          <div class="experience-grid" id="experience-grid"></div>
+        </section>
+
+        <section class="section" id="island" aria-labelledby="island-title">
+          <div class="section-head">
+            <div><div class="eyebrow">Your island guide</div><h2 id="island-title">Find a little magic.</h2></div>
+            <p>Every stop holds something from the community. Explore them all and collect six island treasures along the way.</p>
+          </div>
+          <div class="guide" id="guide"></div>
+        </section>
+
+        <section class="section" id="messages" aria-labelledby="messages-title">
+          <div class="section-head">
+            <div><div class="eyebrow">From the Donuts, with love</div><h2 id="messages-title">Notes that stick.</h2></div>
+            <button type="button" class="btn light" data-contribute>+ Add your message</button>
+          </div>
+          <div class="message-section">
+            <p id="wall-description">A little reminder of all the good you put into the world.</p>
+            <div class="filters" id="filters" role="toolbar" aria-label="Filter notes by destination"></div>
+            <div class="notes" id="notes" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="section" id="treasures" aria-labelledby="treasures-title">
+          <div class="section-head">
+            <div><div class="eyebrow">A little extra sweetness</div><h2 id="treasures-title">Island treasures.</h2></div>
+            <p>Find the hidden treasures in each destination and play a tiny island game.</p>
+          </div>
+          <div class="treasure">
+            <article class="feature">
+              <h3>Your treasure collection</h3>
+              <p id="collection-caption">0 of 6 found. Explore each island stop to unlock its keepsake.</p>
+              <div class="collection" id="collection"></div>
+              <div class="actions"><button type="button" class="btn light small" data-exp="game">Play Sprinkle Hunt ✦</button><button type="button" class="btn light small" data-exp="drop">Play Donut Drop 🕹️</button></div>
+            </article>
+            <article class="feature letter-feature">
+              <h3>For the days you need a little love.</h3>
+              <p>Kind words aren’t just for birthdays. Leave an “open when” letter for a moment when Dani might need a reminder of how much she means to people.</p>
+              <button type="button" class="btn small" data-contribute="letter">Write an open-when letter</button>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="bottom">
+      <div class="wave" aria-hidden="true"></div>
+      <div class="wrap foot">
+        <div><strong>🍩 Made by the Donuts, for Dani.</strong><br /><small>An unofficial community-made gift. Not affiliated with Twitch, Pokémon or Fortnite.</small></div>
+        <div class="links" id="links"></div>
+      </div>
+    </footer>
+
+    <div class="game" id="game" hidden aria-label="Donut Island adventure">
+      <div class="game-stage" tabindex="0" aria-label="Donut Island. Use W A S D or the arrow keys to walk, Space to jump and E to talk or enter. Press M for the map and Escape for the menu."></div>
+      <div class="game-loading" role="status"><div class="spinner-donut" aria-hidden="true"></div><p>Baking the island…</p></div>
+    </div>
+
+    <dialog id="dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+
+    <section class="reveal" id="reveal" hidden aria-label="Surprise reveal">
+      <canvas class="reveal-confetti" id="reveal-confetti" aria-hidden="true"></canvas>
+      <div class="reveal-card">
+        <div class="envelope" aria-hidden="true"><div class="env-back"></div><div class="env-letter"><span>🍩</span></div><div class="env-front"></div><div class="env-flap"></div></div>
+        <div class="eyebrow">From every little donut</div>
+        <h1>Dani, look what<br /> <em>you’ve built.</em></h1>
+        <p>Because of you, strangers became friends, ordinary days became memories, and a little corner of the internet became something pretty special.</p>
+        <button type="button" class="btn big" id="reveal-close">Open your island ♡</button>
+      </div>
+    </section>
+
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+
+    <noscript><p class="noscript">Dani’s Donut Island needs JavaScript to bake. Please enable it 🍩</p></noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

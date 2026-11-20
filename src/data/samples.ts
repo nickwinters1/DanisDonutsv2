@@ -1,0 +1,127 @@
+/* Clearly-labeled SAMPLE content for Preview Mode only.
+ * These are not real community members or real messages, and they never reach the database.
+ * They disappear as soon as the shared island is connected (or the edition ID changes). */
+import type { Message } from './types';
+
+const s = (m: Omit<Message, 'event_id' | 'status' | 'visibility' | 'example' | 'link'> & { link?: string | null }): Message => ({
+  event_id: 'preview',
+  status: 'approved',
+  visibility: 'public',
+  example: true,
+  link: null,
+  ...m,
+});
+
+export const SAMPLES: Message[] = [
+  s({
+    id: 'example-1',
+    category: 'note',
+    author: 'Example Donut',
+    title: 'A little thank you',
+    body: 'Your stream makes ordinary days a little brighter. Here’s to more laughs, chaotic games and good memories!',
+    meta: { frosting: 'strawberry', sprinkles: 'rainbow', region: 'na' },
+  }),
+  s({
+    id: 'example-2',
+    category: 'memory',
+    author: 'Example Donut',
+    title: 'The best lobby',
+    body: 'This is where someone could share a favorite community moment or a friendship that began in chat.',
+  }),
+  s({
+    id: 'example-3',
+    category: 'letter',
+    author: 'Example Donut',
+    title: 'Open when you need a smile',
+    body: 'A little reminder to celebrate the small wins, too.',
+    meta: { crystal: 'rose' },
+  }),
+  s({
+    id: 'example-4',
+    category: 'note',
+    author: 'Sample Sprinkle',
+    title: 'Strawberry sunshine',
+    body: 'A sample decorated donut. Imagine a real viewer’s note here. Every approved note becomes a little donut friend walking around the island.',
+    meta: { frosting: 'blueberry', sprinkles: 'stars', region: 'eu' },
+  }),
+  s({
+    id: 'example-5',
+    category: 'card',
+    author: 'Example Bear Claw',
+    title: 'The Victory Donut',
+    body: 'Special ability: brings good vibes to every lobby.',
+    meta: { cardStyle: 'gaming', region: 'eu', frosting: 'chocolate', sprinkles: 'rainbow' },
+  }),
+  s({
+    id: 'example-6',
+    category: 'letter',
+    author: 'Sample Cruller',
+    title: 'Open when you need encouragement',
+    body: 'A sample crystal of kindness. Every real note will have its own sparkle.',
+    meta: { crystal: 'amethyst', region: 'oc', frosting: 'vanilla', sprinkles: 'hearts' },
+  }),
+  s({
+    id: 'example-7',
+    category: 'memory',
+    author: 'Demo Glaze',
+    title: 'That one raid night',
+    body: 'A sample memory: the night chat could not stop laughing. Real memories from the community will wash up on Memory Beach.',
+    meta: { frosting: 'ocean', sprinkles: 'hearts', region: 'na' },
+  }),
+  s({
+    id: 'example-8',
+    category: 'card',
+    author: 'Sample Sprinkle',
+    title: 'Crystal Guardian',
+    body: 'Special ability: turns any long day into a cozy stream.',
+    meta: { cardStyle: 'crystal', frosting: 'blueberry', sprinkles: 'stars' },
+  }),
+  s({
+    id: 'example-9',
+    category: 'card',
+    author: 'Demo Glaze',
+    title: 'Beach Day Legend',
+    body: 'Passive: +10 sunshine to everyone in the lobby.',
+    meta: { cardStyle: 'beach', region: 'sa', frosting: 'ocean', sprinkles: 'hearts' },
+  }),
+  s({
+    id: 'example-10',
+    category: 'clip',
+    author: 'Sample Cruller',
+    title: 'Favorite victory clip',
+    body: 'A sample clip card. Approved YouTube or MP4 links can play right inside Sunset Cinema.',
+    meta: { region: 'af', frosting: 'vanilla', sprinkles: 'hearts' },
+  }),
+  s({
+    id: 'example-11',
+    category: 'capsule',
+    author: 'Example Boston Cream',
+    title: 'A wish for the next chapter',
+    body: 'A sample wish for the future: more cozy streams, big wins and good friends in every lobby.',
+    meta: { region: 'as', frosting: 'rainbow', sprinkles: 'rainbow' },
+  }),
+  s({
+    id: 'example-12',
+    category: 'note',
+    author: 'Example Boston Cream',
+    title: 'Thank you for the good vibes',
+    body: 'Sample: thank you for making everyone feel welcome, every single stream.',
+    meta: { frosting: 'rainbow', sprinkles: 'rainbow', region: 'oc' },
+  }),
+  s({
+    id: 'example-13',
+    category: 'card',
+    author: 'Example Donut',
+    title: 'Golden Sprinkle',
+    body: 'Ultra rare: appears only when the whole community shows up for someone.',
+    meta: { cardStyle: 'collector', frosting: 'strawberry', sprinkles: 'rainbow' },
+  }),
+  s({
+    id: 'example-14',
+    category: 'letter',
+    author: 'Demo Glaze',
+    title: 'Open when the day felt long',
+    body: 'A sample open-when letter. Real ones will sparkle here, ready for whenever they are needed.',
+    meta: { crystal: 'aqua', region: 'eu' },
+  }),
+];
