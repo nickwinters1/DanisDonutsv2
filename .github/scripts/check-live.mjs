@@ -54,7 +54,7 @@ if (env.GITHUB_TOKEN) {
   });
   if (r?.ok) pages = await r.json();
 }
-const domain = (pages?.cname || '').toLowerCase();
+const domain = (env.CHECK_DOMAIN || pages?.cname || '').toLowerCase();
 
 /** Load the island, retrying for a while: a fresh deploy can take a minute to reach every server. */
 async function loadIsland(url, tries) {
@@ -85,8 +85,9 @@ if (env.CHECK_SITE_URL) page = await loadIsland(env.CHECK_SITE_URL, 2);
 else if (domain) {
   page = await loadIsland(`https://${domain}/`, 4);
   if (!page) {
-    const plain = await tryGet(bust(`http://${domain}/`));
-    if (plain?.ok && (await plain.text()).includes('Donut')) {
+    // Until GitHub has issued the certificate, the domain only answers on plain http.
+    page = await loadIsland(`http://${domain}/`, 2);
+    if (page) {
       warn(`http://${domain} works, but the secure https:// version isn't ready yet. GitHub issues the certificate automatically once DNS is right; check back in a little while.`);
     } else {
       warn(
@@ -181,11 +182,13 @@ if (!supabaseUrl && !supabaseKey) {
 
 // ── 3 · Your own domain ──
 if (domain) {
-  if (pages.https_enforced) ok('“Enforce HTTPS” is on.');
+  if (pages?.https_enforced) ok('“Enforce HTTPS” is on.');
   else warn('Tick “Enforce HTTPS” in Settings → Pages (it becomes clickable once GitHub has issued the certificate).');
   if (!domain.startsWith('www.')) {
     const w = await tryGet(bust(`https://www.${domain}/`));
+    const wPlain = w?.ok ? null : await tryGet(bust(`http://www.${domain}/`));
     if (w?.ok) ok(`www.${domain} works too.`);
+    else if (wPlain?.ok) info(`www.${domain} points to GitHub correctly; its https:// version will work once the certificate is ready.`);
     else info(`www.${domain} doesn't work yet (DNS record: CNAME www → ${owner.toLowerCase()}.github.io).`);
   }
 } else if (pages) {
