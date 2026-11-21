@@ -7,6 +7,8 @@ Walk around a pastel island, meet the Donuts, collect sprinkles, read notes in b
 
 It’s an unofficial, community-made gift. Every visual is original and drawn in code, with no official game art, licensed music or real community messages. The examples you see in Preview Mode are clearly labeled samples.
 
+> **🚀 Launching it for real?** Follow **[GO-LIVE.md](GO-LIVE.md)**: every step to save everyone’s notes (Supabase), moderate them, and put the island on your own domain.
+
 ---
 
 ## What’s on the island
@@ -21,7 +23,7 @@ It’s an unofficial, community-made gift. Every visual is original and drawn in
 | **XP & trophies** | XP, 6 ranks (Sprinkle → Legendary Donut) and 12 trophies, including a secret one. |
 | **Attractions** | Community Donut Box · Crystal of Kindness · **Booster packs with holographic, tilting cards** · Sunset Cinema (YouTube / MP4) · Donuts Around the World · Donut Diaries · **Sprinkle Hunt** (memory game) · **Donut Drop** (60-second arcade game). |
 | **Leave a note** | The form shows a **live preview of your Donut**: pick its frosting and sprinkles, a crystal for open-when letters, a card theme for trading cards, and an optional continent. Drafts save automatically. |
-| **Organizers** | Moderation (pending / approved / rejected), edition settings, **open the surprise**, private JSON export, publish an edition to the Diaries and **trigger the live OBS finale**. |
+| **Organizers** | Moderation (pending / approved / rejected), plus **Hide / Delete buttons on every note** while signed in. Also edition settings, **open the surprise**, private JSON export, publish an edition to the Diaries and **trigger the live OBS finale**. |
 | **Live updates** | Open pages notice when the organizers open the surprise and when new notes are approved, so viewers don’t need to reload. |
 | **OBS overlay** | `obs-overlay.html`: a transparent finale (raining donuts, sprinkles, fireworks and the title card) plus an optional **rotating love-notes lower third**. |
 | **Sound** | Everything you hear is synthesized live in the browser: waves, a soft pad, footsteps, splashes, Donut “voices”, chimes and fireworks. There’s a sound toggle in the header and in the game. |
@@ -42,6 +44,8 @@ The repo already includes the deploy workflow (`.github/workflows/deploy.yml`), 
    - The OBS overlay is at **https://nickwinters1.github.io/DanisDonutsv2/obs-overlay.html**
 
 Until you connect the shared database (step 3), the live site runs in **Preview Mode**: everyone sees the labeled sample notes, and anything they submit stays only in their own browser. A **Preview** label in the ribbon says so.
+
+**Your own domain:** see [GO-LIVE.md → Part 5](GO-LIVE.md#part-5-your-own-domain). In short: add the domain under **Settings → Pages → Custom domain**, add GitHub’s DNS records at your registrar, tick **Enforce HTTPS**, and set an Actions variable `SITE_URL` (e.g. `https://yourdomain.com/`) so link previews use it.
 
 ## 2 · Try it on your computer
 
@@ -71,6 +75,8 @@ Open the address it prints. Add `?quality=high`, `?quality=medium` or `?quality=
 For local development, copy `.env.example` to `.env` and fill in the same two values.
 
 The public key is designed to be public. **RLS is what protects the data**: visitors can only submit pending notes, and they only ever read approved **public** notes after the reveal.
+
+**Moderation:** every new note waits in **Pending** until an organizer approves it. **Hide** (reject) takes a note off the island but keeps it; **Delete** removes it for good. Signed-in organizers also get Hide / Delete buttons right on each note. To publish notes instantly instead (you can still hide or delete them), run `supabase/optional-auto-approve.sql`; `supabase/optional-require-approval.sql` undoes it.
 
 ## 4 · Running the celebration
 

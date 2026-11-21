@@ -54,4 +54,7 @@ export const SITE = {
 
 /** How often an open page checks whether the organizers opened the surprise (live mode). */
 export const POLL_EVENT_MS = 30_000;
-export const POLL_MESSAGES_MS = 180_000;
+/** A tiny "how many notes are public?" check; the full list is only re-downloaded when it changes. */
+export const POLL_COUNT_MS = 45_000;
+/** Safety net: re-download everything this often anyway. */
+export const POLL_MESSAGES_MS = 600_000;

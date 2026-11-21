@@ -843,6 +843,38 @@
   height: 100%;
 }
 
+/* organizer tools on a note (only rendered for signed-in organizers) */
+.note-mod {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(120, 91, 109, 0.25);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a6c86;
+}
+.mod-btn {
+  border: 1px solid var(--line-2);
+  background: #fff;
+  color: var(--berry);
+  border-radius: 99px;
+  padding: 4px 11px;
+  font: 700 12px var(--font-body);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.mod-btn:hover {
+  background: var(--blush);
+}
+.mod-btn.danger {
+  color: #a3314f;
+  border-color: #f0c4cf;
+}
+
 /* ───────── Treasures ───────── */
 .treasure {
   display: grid;

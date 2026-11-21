@@ -647,7 +647,7 @@ export class IslandGame {
         : 'Shh… the Donuts’ messages are sealed until the big reveal. Leave one at the Donut Shop, and check back on the big day!';
       progress.bottle('tip');
       this.host.openMessage(
-        { id: 'tip', event_id: '', category: 'note', author: 'Glaze, the island guide', title: 'A note from the island', body: tip, link: null, visibility: 'public', status: 'approved', example: true },
+        { id: 'tip', event_id: '', category: 'note', author: 'Glaze, the island guide', title: 'A note from the island', body: tip, link: null, visibility: 'public', status: 'approved' },
         'bottle',
       );
     }

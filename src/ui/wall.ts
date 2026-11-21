@@ -16,6 +16,11 @@ export function noteHTML(m: Message, opts: { full?: boolean } = {}): Raw {
     <p>${m.body}</p>
     ${url ? html`<a class="attachment" href="${url}" target="_blank" rel="noopener noreferrer">${raw(ICONS.external)} Open shared link</a>` : ''}
     <div class="from"><span class="av">${raw(avatarSVG(m.author || 'Anonymous Donut', m.meta?.frosting, m.meta?.sprinkles))}</span>From ${m.author || 'Anonymous Donut'}</div>
+    ${store.admin && !m.example && m.id !== 'tip' ? html`<div class="note-mod" role="group" aria-label="Organizer tools for this note">
+      <span>Organizer:</span>
+      <button type="button" class="mod-btn" data-mod="rejected" data-id="${m.id}">Hide</button>
+      <button type="button" class="mod-btn danger" data-mod="delete" data-id="${m.id}">Delete</button>
+    </div>` : ''}
   </article>`;
 }
 
