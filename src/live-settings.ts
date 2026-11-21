@@ -17,9 +17,9 @@
  */
 export const LIVE = {
   /** Supabase → Project Settings → Data API → Project URL, e.g. 'https://abcdefghijklmnop.supabase.co' */
-  supabaseUrl: '',
+  supabaseUrl: 'https://frhnadwefaltfvsugsrz.supabase.co',
   /** Supabase → Project Settings → API Keys → Publishable key ('sb_publishable_…'), or the legacy "anon public" key */
-  supabaseKey: '',
-  /** The site's address, used for link previews (Discord, X, iMessage…). Change it to 'https://yourdomain.com/' once your domain works. */
-  siteUrl: 'https://nickwinters1.github.io/DanisDonutsv2/',
+  supabaseKey: 'sb_publishable_9kMFv4fkqdy5Vj0L5VkDqg_7pEns1Wz',
+  /** The site's address, used for link previews (Discord, X, iMessage…). */
+  siteUrl: 'https://heydanidonuts.com/',
 };
