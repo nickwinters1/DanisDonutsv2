@@ -29,8 +29,18 @@ if (SECRET_KEY_BLOCKED) {
   );
 }
 
+/** The Project URL is just the origin (https://xxxx.supabase.co). People often paste the
+ *  REST address (…/rest/v1/) instead, so anything after the origin is dropped. */
+function projectUrl(u: string) {
+  try {
+    return u ? new URL(u).origin : '';
+  } catch {
+    return u.replace(/\/+$/, '');
+  }
+}
+
 export const CONFIG = {
-  url: SECRET_KEY_BLOCKED ? '' : url.replace(/\/$/, ''),
+  url: SECRET_KEY_BLOCKED ? '' : projectUrl(url),
   key: SECRET_KEY_BLOCKED ? '' : key,
 };
 

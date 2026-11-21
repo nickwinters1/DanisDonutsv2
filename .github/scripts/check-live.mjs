@@ -139,7 +139,7 @@ if (!supabaseUrl && !supabaseKey) {
   bad('supabaseUrl is set but supabaseKey is empty. Add the publishable key (sb_publishable_…) to src/live-settings.ts.');
 } else {
   const h = { apikey: supabaseKey, ...(supabaseKey.split('.').length === 3 ? { authorization: `Bearer ${supabaseKey}` } : {}) };
-  const r = await tryGet(`${supabaseUrl}/rest/v1/island_event?select=id,title,revealed,finale_token`, { headers: h });
+  const r = await tryGet(`${dbOrigin}/rest/v1/island_event?select=id,title,revealed,finale_token`, { headers: h });
   const body = r ? await r.json().catch(() => null) : null;
   const event = r?.ok && Array.isArray(body) ? body[0] : null;
   if (!r) {
@@ -151,17 +151,17 @@ if (!supabaseUrl && !supabaseKey) {
 
     if (event.revealed) {
       const c = await tryGet(
-        `${supabaseUrl}/rest/v1/island_messages?select=id&event_id=eq.${encodeURIComponent(event.id)}&status=eq.approved&visibility=eq.public`,
+        `${dbOrigin}/rest/v1/island_messages?select=id&event_id=eq.${encodeURIComponent(event.id)}&status=eq.approved&visibility=eq.public`,
         { method: 'HEAD', headers: { ...h, prefer: 'count=exact' } },
       );
       const total = c?.ok ? c.headers.get('content-range')?.split('/')[1] : undefined;
       if (total !== undefined && total !== '*') info(`${total} approved public note${total === '1' ? '' : 's'} on the island right now.`);
       else bad(`Couldn't count the public notes (${c ? `HTTP ${c.status}` : 'no answer'}).`);
     }
-    const a = await tryGet(`${supabaseUrl}/rest/v1/island_archives?select=id&limit=1`, { headers: h });
+    const a = await tryGet(`${dbOrigin}/rest/v1/island_archives?select=id&limit=1`, { headers: h });
     if (!a?.ok) bad('The diary table (island_archives) is missing. In Supabase → SQL Editor, run supabase/upgrade.sql.');
 
-    const s = await tryGet(`${supabaseUrl}/auth/v1/settings`, { headers: { apikey: supabaseKey } });
+    const s = await tryGet(`${dbOrigin}/auth/v1/settings`, { headers: { apikey: supabaseKey } });
     const auth = s?.ok ? await s.json().catch(() => null) : null;
     if (auth?.disable_signup === true) ok('Public sign-ups are off: only organizer logins you create can sign in.');
     else if (auth?.disable_signup === false)
