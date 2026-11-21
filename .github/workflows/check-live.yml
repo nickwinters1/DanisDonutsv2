@@ -1,0 +1,35 @@
+name: Check the live site
+
+# A read-only launch check: is the island up, is its database connected and set up, and is your
+# own domain working? Open a run and look at its Summary for the results and any to-dos.
+on:
+  # after every deploy
+  workflow_run:
+    workflows: [Deploy to GitHub Pages]
+    types: [completed]
+    branches: [main]
+  # every 3 days: a health check that also keeps a free Supabase project from pausing for inactivity
+  schedule:
+    - cron: '41 16 */3 * *'
+  # any time: Actions → Check the live site → Run workflow
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: read
+
+jobs:
+  check:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check the island, its database and your domain
+        run: node .github/scripts/check-live.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}

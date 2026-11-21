@@ -1,18 +1,21 @@
 import { defineConfig, loadEnv, type Plugin } from 'vite';
+import { LIVE } from './src/live-settings.ts';
 
 /** Production-only hardening + share previews:
  *  • a Content-Security-Policy that only allows this site, the configured Supabase project
  *    and youtube-nocookie embeds (defence in depth: every message is escaped anyway)
- *  • absolute og:image / og:url so link previews work on Discord, X, iMessage… */
+ *  • absolute og:image / og:url so link previews work on Discord, X, iMessage…
+ *  Values come from src/live-settings.ts; GitHub Actions variables, if set, take priority. */
 function islandHtml(env: Record<string, string>): Plugin {
+  const supabaseUrl = (env.VITE_SUPABASE_URL || LIVE.supabaseUrl).trim();
   const supabase = (() => {
     try {
-      return env.VITE_SUPABASE_URL ? new URL(env.VITE_SUPABASE_URL).origin : '';
+      return supabaseUrl ? new URL(supabaseUrl).origin : '';
     } catch {
       return '';
     }
   })();
-  const site = (env.SITE_URL || 'https://nickwinters1.github.io/DanisDonutsv2/').replace(/\/?$/, '/');
+  const site = (env.SITE_URL || LIVE.siteUrl || 'https://nickwinters1.github.io/DanisDonutsv2/').trim().replace(/\/?$/, '/');
   const csp = [
     "default-src 'self'",
     "script-src 'self'",

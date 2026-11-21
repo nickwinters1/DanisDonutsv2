@@ -1,9 +1,10 @@
-/* Everything you might want to change lives here. */
+/* Everything you might want to change lives here (the database connection is in live-settings.ts). */
+import { LIVE } from './live-settings';
 
-/** Supabase PUBLIC settings, injected at build time (see README → "Connect the shared island").
+/** Supabase PUBLIC settings from live-settings.ts (or the matching GitHub Actions variables).
  *  Leave them empty and the island runs in Preview Mode (everything stays in this browser). */
-const url = String(import.meta.env.VITE_SUPABASE_URL ?? '').trim();
-const key = String(import.meta.env.VITE_SUPABASE_ANON_KEY ?? '').trim();
+const url = String(import.meta.env.VITE_SUPABASE_URL || LIVE.supabaseUrl).trim();
+const key = String(import.meta.env.VITE_SUPABASE_ANON_KEY || LIVE.supabaseKey).trim();
 
 /** Refuse anything that looks like a secret key: it must never ship in a public website. */
 function looksSecret(k: string) {
