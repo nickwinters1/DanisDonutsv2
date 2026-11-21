@@ -17,7 +17,8 @@ export function renderRibbon() {
   set('event-state', store.loadError ? '· Connection unavailable' : ev.revealed ? '· Island open' : '· Surprise sealed');
   document.getElementById('event-dot')?.classList.toggle('live', ev.revealed && !store.loadError);
   const n = store.messages.filter((m) => !m.example).length;
-  set('mode-label', store.demo ? 'Preview • saved on this device' : ev.revealed ? `Community edition • ${n} note${n === 1 ? '' : 's'} on the island` : 'Community edition');
+  const mode = store.demo ? 'Preview • saved on this device' : ev.revealed ? `Community edition • ${n} note${n === 1 ? '' : 's'} on the island` : 'Community edition';
+  set('mode-label', store.admin && !store.demo ? `${mode} • 🛠 Organizer signed in` : mode);
 }
 
 export function renderSavefile(webgl: boolean) {

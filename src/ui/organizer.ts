@@ -155,6 +155,23 @@ export async function review(id: string, status: Status | 'delete') {
   }
 }
 
+/** Hide or delete a note straight from the wall / the island (signed-in organizers only). */
+export async function moderate(id: string, action: 'rejected' | 'delete') {
+  if (!store.admin) return;
+  const ok =
+    action === 'delete'
+      ? confirm('Delete this note for good? This can’t be undone.')
+      : confirm('Hide this note from the island? You can bring it back any time from the Organizer dashboard (Rejected tab).');
+  if (!ok) return;
+  try {
+    await store.review(id, action);
+    closeDialog();
+    toast(action === 'delete' ? 'Note deleted' : 'Note hidden from the island', { icon: action === 'delete' ? '🗑️' : '🙈' });
+  } catch (e) {
+    toast(e instanceof Error ? e.message : String(e));
+  }
+}
+
 export function exportRows() {
   if (!store.admin) return;
   store.exportRows();

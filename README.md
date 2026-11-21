@@ -7,6 +7,8 @@ Walk around a pastel island, meet the Donuts, collect sprinkles, read notes in b
 
 It’s an unofficial, community-made gift. Every visual is original and drawn in code, with no official game art, licensed music or real community messages. The examples you see in Preview Mode are clearly labeled samples.
 
+> **🚀 Launching it for real?** Follow **[GO-LIVE.md](GO-LIVE.md)**: every step to save everyone’s notes (Supabase), moderate them, and put the island on your own domain.
+
 ---
 
 ## What’s on the island
@@ -21,7 +23,7 @@ It’s an unofficial, community-made gift. Every visual is original and drawn in
 | **XP & trophies** | XP, 6 ranks (Sprinkle → Legendary Donut) and 12 trophies, including a secret one. |
 | **Attractions** | Community Donut Box · Crystal of Kindness · **Booster packs with holographic, tilting cards** · Sunset Cinema (YouTube / MP4) · Donuts Around the World · Donut Diaries · **Sprinkle Hunt** (memory game) · **Donut Drop** (60-second arcade game). |
 | **Leave a note** | The form shows a **live preview of your Donut**: pick its frosting and sprinkles, a crystal for open-when letters, a card theme for trading cards, and an optional continent. Drafts save automatically. |
-| **Organizers** | Moderation (pending / approved / rejected), edition settings, **open the surprise**, private JSON export, publish an edition to the Diaries and **trigger the live OBS finale**. |
+| **Organizers** | Moderation (pending / approved / rejected), plus **Hide / Delete buttons on every note** while signed in. Also edition settings, **open the surprise**, private JSON export, publish an edition to the Diaries and **trigger the live OBS finale**. |
 | **Live updates** | Open pages notice when the organizers open the surprise and when new notes are approved, so viewers don’t need to reload. |
 | **OBS overlay** | `obs-overlay.html`: a transparent finale (raining donuts, sprinkles, fireworks and the title card) plus an optional **rotating love-notes lower third**. |
 | **Sound** | Everything you hear is synthesized live in the browser: waves, a soft pad, footsteps, splashes, Donut “voices”, chimes and fireworks. There’s a sound toggle in the header and in the game. |
@@ -43,6 +45,10 @@ The repo already includes the deploy workflow (`.github/workflows/deploy.yml`), 
 
 Until you connect the shared database (step 3), the live site runs in **Preview Mode**: everyone sees the labeled sample notes, and anything they submit stays only in their own browser. A **Preview** label in the ribbon says so.
 
+**Your own domain:** see [GO-LIVE.md → Part 5](GO-LIVE.md#part-5-your-own-domain). In short: add the domain under **Settings → Pages → Custom domain**, add GitHub’s DNS records at your registrar, tick **Enforce HTTPS**, and set `siteUrl` in **`src/live-settings.ts`** (e.g. `https://yourdomain.com/`) so link previews use it.
+
+**Launch check:** after every deploy, every 3 days, and whenever you click **Actions → Check the live site → Run workflow**, GitHub checks the island, the OBS overlay, the database and your domain, and lists ✅ or exactly what to fix on the run’s **Summary** page. It only reads public information.
+
 ## 2 · Try it on your computer
 
 You need [Node.js](https://nodejs.org) 20+.
@@ -56,21 +62,21 @@ Open the address it prints. Add `?quality=high`, `?quality=medium` or `?quality=
 
 ## 3 · Connect the shared island (Supabase, free tier)
 
-1. Create a project at https://supabase.com/ and open its **SQL Editor**. Run **`supabase/setup.sql`**, then **`supabase/upgrade.sql`** (each once). If you already ran the original v1 `setup.sql`, run only `upgrade.sql` after backing up. These set up the sealed edition, messages, organizer accounts, archives and **row-level security (RLS)**.
-2. **Authentication → Users → Add user**: create an organizer with a strong password. Copy their user UUID and run:
-   ```sql
-   insert into public.island_admins(user_id) values ('THE-USER-UUID');
-   ```
-   Do this for each organizer. Turn off public sign-ups in Auth settings if you don’t need them; visitors never need accounts.
-3. Copy the project **URL** and the **public anon / publishable key** (Project Settings → API, or the Connect dialog). **Never use the service-role or secret key.** The site refuses to use one if it’s supplied by mistake.
-4. In GitHub: **Settings → Secrets and variables → Actions → Variables**, add two variables:
-   - `VITE_SUPABASE_URL`: your project URL
-   - `VITE_SUPABASE_ANON_KEY`: the public anon / publishable key
-5. Re-run the deploy (**Actions → Deploy to GitHub Pages → Run workflow**). The ribbon now says **Community edition**. The site and the OBS overlay both pick up the same settings, so there’s nothing to edit in the HTML anymore.
+Every click, step by step: **[GO-LIVE.md](GO-LIVE.md)**. In short:
+
+1. Create a project at https://supabase.com/. In **Authentication → Users → Add user**, create your organizer login (email + strong password, **Auto Confirm**).
+2. In the **SQL Editor**, run **`supabase/one-step-setup.sql`** once. It’s `setup.sql` + `upgrade.sql` + “make the first login the organizer” in a single all-or-nothing transaction, and it ends with **All set! *your email* is the organizer.** These set up the sealed edition, messages, organizer accounts, archives and **row-level security (RLS)**. (Already ran the original v1 `setup.sql`? Back up, then run only `upgrade.sql`.)
+   - More organizers: create their login, then run `insert into public.island_admins(user_id) values ('THEIR-USER-UUID');`
+   - Turn off public sign-ups (**Authentication → Sign In / Providers**); visitors never need accounts.
+3. Copy the project **URL** and the **publishable key** (or legacy **anon public** key) from Project Settings. **Never use the service-role or secret key.** The site refuses to use one if it’s supplied by mistake.
+4. Put both in **`src/live-settings.ts`** (on GitHub: ✏️ pencil → paste between the quotes → **Commit changes**). The site redeploys itself, and the ribbon now says **Community edition**. The site and the OBS overlay both pick up the same settings.
+   - Prefer not to keep them in the code? Add Actions **Variables** `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` instead (Settings → Secrets and variables → Actions → Variables) and re-run the deploy. Variables win over the file.
 
 For local development, copy `.env.example` to `.env` and fill in the same two values.
 
 The public key is designed to be public. **RLS is what protects the data**: visitors can only submit pending notes, and they only ever read approved **public** notes after the reveal.
+
+**Moderation:** every new note waits in **Pending** until an organizer approves it. **Hide** (reject) takes a note off the island but keeps it; **Delete** removes it for good. Signed-in organizers also get Hide / Delete buttons right on each note. To publish notes instantly instead (you can still hide or delete them), run `supabase/optional-auto-approve.sql`; `supabase/optional-require-approval.sql` undoes it.
 
 ## 4 · Running the celebration
 
@@ -106,6 +112,7 @@ The overlay and Streamer.bot trigger independently, so exact timing varies a lit
 
 ## 6 · Make it yours
 
+- **`src/live-settings.ts`** connects the database and sets your domain for link previews (public values only).
 - **`src/config.ts`** holds Dani’s links and **the finale letter** (please read it and make it yours).
 - **`src/data/catalog.ts`** holds the six destinations, their prompts and treasures, the attractions, frostings, crystals, regions and card themes. Option keys must match the check in `supabase/upgrade.sql`.
 - **`src/data/samples.ts`** holds the labeled Preview Mode samples. They never reach the database.

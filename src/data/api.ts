@@ -42,3 +42,17 @@ export async function api<T = unknown>(path: string, { method = 'GET', body, aut
   const raw = await r.text();
   return (raw ? JSON.parse(raw) : null) as T;
 }
+
+/** Counts rows with a HEAD request (no body is downloaded). Returns null if the count isn't available. */
+export async function apiCount(path: string): Promise<number | null> {
+  const headers: Record<string, string> = { apikey: CONFIG.key, Prefer: 'count=exact' };
+  if (!CONFIG.key.startsWith('sb_publishable_')) headers.Authorization = 'Bearer ' + CONFIG.key;
+  try {
+    const r = await fetch(CONFIG.url + path, { method: 'HEAD', headers, cache: 'no-store' });
+    const range = r.ok ? r.headers.get('content-range') : null;
+    const total = range?.split('/')[1];
+    return total && total !== '*' ? Number(total) : null;
+  } catch {
+    return null;
+  }
+}

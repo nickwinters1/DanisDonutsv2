@@ -22,7 +22,7 @@ import { closeDialog, onDialog } from './ui/dialog';
 import { toast } from './ui/toast';
 import { burst } from './ui/confetti';
 import { contribute } from './ui/contribute';
-import { archive, exportRows, logout, organizer, review, setTab, signal } from './ui/organizer';
+import { archive, exportRows, logout, moderate, organizer, review, setTab, signal } from './ui/organizer';
 import { showReveal, wireReveal } from './ui/reveal';
 import { renderWall, msgDetail } from './ui/wall';
 import { donutDrop, sprinkleHunt } from './ui/games';
@@ -152,7 +152,8 @@ function wireClicks() {
     const b = t.closest<HTMLElement>('button, [data-play]');
     if (!b) return;
     const d = b.dataset;
-    if ('close' in d) closeDialog();
+    if (d.mod) void moderate(d.id!, d.mod as 'rejected' | 'delete');
+    else if ('close' in d) closeDialog();
     else if ('contribute' in d) contribute((d.contribute as Category) || 'note');
     else if ('play' in d) void openGame();
     else if (d.travel) void openGame(d.travel);

@@ -2,9 +2,9 @@
  * Preview Mode (no Supabase configured) keeps everything in this browser's localStorage,
  * exactly like the original single-file island. Live mode talks to Supabase, where
  * Row Level Security decides what anyone can read or write. */
-import { DEMO, POLL_EVENT_MS, POLL_MESSAGES_MS } from '../config';
+import { DEMO, POLL_COUNT_MS, POLL_EVENT_MS, POLL_MESSAGES_MS } from '../config';
 import { get, save } from '../lib/storage';
-import { api, ApiError } from './api';
+import { api, apiCount, ApiError } from './api';
 import { SAMPLES } from './samples';
 import type { Archive, IslandEvent, Message, NewMessage, Session, Status } from './types';
 
@@ -121,6 +121,14 @@ class Store {
           /* offline for a moment — try again next tick */
         }
       }, POLL_EVENT_MS),
+      // newly approved / hidden / deleted notes: compare a cheap count first
+      window.setInterval(async () => {
+        if (!visible() || !this.event.revealed || this.loadError) return;
+        const n = await apiCount(
+          '/rest/v1/island_messages?select=id&event_id=eq.' + encodeURIComponent(this.event.id) + '&status=eq.approved&visibility=eq.public',
+        );
+        if (n !== null && n !== this.messages.length) await this.refresh();
+      }, POLL_COUNT_MS),
       window.setInterval(() => {
         if (visible() && this.event.revealed) void this.refresh();
       }, POLL_MESSAGES_MS),
@@ -166,6 +174,7 @@ class Store {
       const own = await this.authed<{ user_id: string }[]>('/rest/v1/island_admins?select=user_id');
       if (!own.length) throw new Error('This account is not authorized.');
       this.admin = true;
+      this.emit();
     } catch (e) {
       this.session = null;
       this.admin = false;
@@ -175,8 +184,9 @@ class Store {
 
   logout() {
     this.session = null;
-    this.admin = DEMO ? this.admin : false;
+    this.admin = false;
     this.organizerRows = [];
+    this.emit();
   }
 
   /** Preview Mode has no login: anyone on this device can use the test controls. */
