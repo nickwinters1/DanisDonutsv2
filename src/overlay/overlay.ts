@@ -3,6 +3,7 @@
  *    revealed. Never replays an old token on startup. Same contract as the original overlay.
  *  • ?test        → shows a test button and plays once (preview it in a normal browser)
  *  • ?duration=14 → length in seconds        • ?scale=1 → size of the title card
+ *  • ?title=off   → the celebration (donuts, sprinkles, fireworks) without the big title card
  *  • ?mode=messages&every=12&pos=bl → rotates approved public love notes as a lower third
  *    (only after the reveal; RLS keeps everything else private). pos: bl, br, tl, tr. */
 import '@fontsource-variable/fraunces/wght.css';
@@ -23,9 +24,11 @@ const SCALE = Math.min(2, Math.max(0.4, Number(params.get('scale')) || 1));
 const MODE = params.get('mode') === 'messages' ? 'messages' : 'finale';
 const EVERY = Math.min(120, Math.max(5, Number(params.get('every')) || 12)) * 1000;
 const POS = ['bl', 'br', 'tl', 'tr'].includes(params.get('pos') ?? '') ? params.get('pos')! : 'bl';
+const TITLE = !['off', 'no', 'none', 'hide', 'false', '0'].includes((params.get('title') ?? '').trim().toLowerCase());
 
 document.documentElement.style.setProperty('--scale', String(SCALE));
 const show = document.getElementById('show')!;
+if (!TITLE) show.style.display = 'none'; // keep only the canvas: falling donuts, sprinkles, fireworks
 document.getElementById('emblem')!.innerHTML = donutSVG({ frosting: 'strawberry', sprinkles: 'rainbow', face: true, seed: 'obs' });
 
 /* ───────── polling (same contract as the original overlay) ───────── */
