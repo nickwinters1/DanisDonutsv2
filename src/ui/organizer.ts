@@ -101,9 +101,10 @@ export async function panel() {
           <h3>Celebration controls</h3>
           <div class="actions">
             <button type="button" class="btn gold small" data-exp="signal">🎆 Trigger live finale</button>
+            <button type="button" class="btn light small" data-exp="signal-test">🧪 Test the overlay</button>
             <button type="button" class="btn light small" data-exp="archive">📔 Publish this edition to the diary</button>
           </div>
-          <p class="hint">Only use the finale control when the broadcast operator is ready. Publishing an edition makes its approved public messages accessible in the diary after switching editions.</p>
+          <p class="hint">Only use the finale control when the broadcast operator is ready. <b>Test the overlay</b> plays the celebration on every OBS overlay that’s open right now, even while the surprise is sealed, so only use it when nobody is live. Publishing an edition makes its approved public messages accessible in the diary after switching editions.</p>
         </div>
         <h3 class="admin-h">Review submissions</h3>
         <div class="tabs" role="tablist">
@@ -187,6 +188,23 @@ export async function signal() {
   try {
     await store.signal();
     toast(store.demo ? 'Local finale signal saved.' : 'Live finale signal sent.', { icon: '🎆' });
+  } catch (e) {
+    toast(e instanceof Error ? e.message : String(e));
+  }
+}
+
+/** A rehearsal: plays on OBS overlays even while the surprise is sealed. The website itself never reacts. */
+export async function testSignal() {
+  if (!store.admin) return;
+  if (
+    !confirm(
+      'Play a TEST celebration on every OBS overlay that’s open right now?\n\nIt works while the surprise is sealed and doesn’t open anything on the website. But it plays for real on any stream that’s live, so only do this when nobody is streaming.',
+    )
+  )
+    return;
+  try {
+    await store.signal(true);
+    toast(store.demo ? 'Local test signal saved.' : 'Test sent. Open overlays play it within about 2 seconds.', { icon: '🧪' });
   } catch (e) {
     toast(e instanceof Error ? e.message : String(e));
   }

@@ -376,6 +376,7 @@ export interface ExperienceHooks {
   game: () => void;
   drop: () => void;
   signal: () => void;
+  signalTest: () => void;
   archive: () => void;
 }
 let hooks: ExperienceHooks;
@@ -383,7 +384,7 @@ export function setExperienceHooks(h: ExperienceHooks) {
   hooks = h;
 }
 
-export function experience(id: AttractionId | 'signal' | 'archive') {
+export function experience(id: AttractionId | 'signal' | 'signal-test' | 'archive') {
   sound.click();
   switch (id) {
     case 'donuts':
@@ -410,6 +411,8 @@ export function experience(id: AttractionId | 'signal' | 'archive') {
       return zone('capsule');
     case 'signal':
       return hooks.signal();
+    case 'signal-test':
+      return hooks.signalTest();
     case 'archive':
       return hooks.archive();
   }

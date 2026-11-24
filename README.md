@@ -97,8 +97,9 @@ The public key is designed to be public. **RLS is what protects the data**: visi
    - `?test` shows a **Test celebration** button and plays once, so you can preview it in a normal browser. Remove it for broadcast.
    - `?duration=20` changes the length. `?scale=0.8` changes the size of the title card. `?title=off` keeps the falling donuts, sprinkles and fireworks but leaves out the big title card.
    - `?mode=messages&every=12&pos=bl` shows a **rotating love-notes lower third** of approved public notes (only after the reveal). `pos` can be `bl`, `br`, `tl` or `tr`.
-2. Once the surprise is open, an organizer opens the Organizer dashboard **off-camera** and presses **Trigger live finale** at the agreed moment. The finale chest on the public island never triggers broadcast effects; only organizers can.
-3. **Optional: Streamer.bot.** On Dani’s streaming PC, set up Streamer.bot with its OBS integration. Enable its HTTP server on **loopback only** (127.0.0.1, port 7474 by default), and create an action named `Dani Island Finale` with the effects you want. **Don’t expose the HTTP server to the internet.** Then run the bridge from this repo with the same public settings:
+2. **Rehearse it:** while nobody is live, press **Test the overlay** in the Organizer dashboard. It plays the celebration on every overlay that's open, even while the surprise is sealed, and doesn't change anything on the website. Streamer.bot only reacts to the real finale.
+3. Once the surprise is open, an organizer opens the Organizer dashboard **off-camera** and presses **Trigger live finale** at the agreed moment. The finale chest on the public island never triggers broadcast effects; only organizers can.
+4. **Optional: Streamer.bot.** On Dani’s streaming PC, set up Streamer.bot with its OBS integration. Enable its HTTP server on **loopback only** (127.0.0.1, port 7474 by default), and create an action named `Dani Island Finale` with the effects you want. **Don’t expose the HTTP server to the internet.** Then run the bridge from this repo with the same public settings:
    ```powershell
    $env:ISLAND_SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co'
    $env:ISLAND_PUBLIC_KEY = 'YOUR-PUBLIC-PUBLISHABLE-KEY'
