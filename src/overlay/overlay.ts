@@ -1,6 +1,7 @@
 /* OBS Browser Source overlay (1920×1080, transparent).
  *  • Finale: celebrates for 14 s when the organizer writes a NEW finale token while the island is
  *    revealed. Never replays an old token on startup. Same contract as the original overlay.
+ *    "Test the overlay" in the Organizer dashboard writes a test-… token that plays even while sealed.
  *  • ?test        → shows a test button and plays once (preview it in a normal browser)
  *  • ?duration=14 → length in seconds        • ?scale=1 → size of the title card
  *  • ?title=off   → the celebration (donuts, sprinkles, fireworks) without the big title card
@@ -52,7 +53,8 @@ async function poll() {
   try {
     const e = await readEvent();
     const t = e.finale_token || '';
-    if (!initial && e.revealed && t && t !== last) celebrate();
+    // the real finale needs the surprise open; an organizer's "Test the overlay" (test-…) plays anytime
+    if (!initial && t && t !== last && (e.revealed || t.startsWith('test-'))) celebrate();
     last = t;
     initial = false;
     if (TEST) status(`${DEMO ? 'Preview mode (this browser)' : 'Connected'} · ${e.revealed ? 'island open' : 'surprise sealed'}`);

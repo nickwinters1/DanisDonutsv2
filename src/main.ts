@@ -22,7 +22,7 @@ import { closeDialog, onDialog } from './ui/dialog';
 import { toast } from './ui/toast';
 import { burst } from './ui/confetti';
 import { contribute } from './ui/contribute';
-import { archive, exportRows, logout, moderate, organizer, review, setTab, signal } from './ui/organizer';
+import { archive, exportRows, logout, moderate, organizer, review, setTab, signal, testSignal } from './ui/organizer';
 import { showReveal, wireReveal } from './ui/reveal';
 import { renderWall, msgDetail } from './ui/wall';
 import { donutDrop, sprinkleHunt } from './ui/games';
@@ -246,7 +246,7 @@ async function boot() {
   wireCardTilt(document.getElementById('dialog')!);
   konami();
   sound.onChange(syncSoundButtons);
-  setExperienceHooks({ onFinale: finaleOpen, game: sprinkleHunt, drop: donutDrop, signal: () => void signal(), archive: () => void archive() });
+  setExperienceHooks({ onFinale: finaleOpen, game: sprinkleHunt, drop: donutDrop, signal: () => void signal(), signalTest: () => void testSignal(), archive: () => void archive() });
   onDialog(
     () => game?.setPaused(true),
     () => game?.setPaused(false),

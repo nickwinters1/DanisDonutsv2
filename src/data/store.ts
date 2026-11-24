@@ -240,9 +240,10 @@ class Store {
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
 
-  /** Writes a fresh finale token. The OBS overlay + Streamer.bot bridge react to a NEW token only. */
-  async signal() {
-    const token = crypto.randomUUID?.() || String(Date.now());
+  /** Writes a fresh finale token. The OBS overlay + Streamer.bot bridge react to a NEW token only.
+   *  A test token ("test-…") also plays on OBS overlays while the surprise is still sealed. */
+  async signal(test = false) {
+    const token = (test ? 'test-' : '') + (crypto.randomUUID?.() || String(Date.now()));
     if (DEMO) {
       this.demoSettings = { ...get<IslandEvent>('ddi-event', DEMO_EVENT), finale_token: token };
       save('ddi-event', this.demoSettings);
